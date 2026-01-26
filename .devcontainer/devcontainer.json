@@ -1,0 +1,52 @@
+// For format details, see https://containers.dev/implementors/json_reference/.
+// For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/ruby
+{
+  "name": "rails-advance",
+  "dockerComposeFile": "compose.yaml",
+  "service": "web",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/rails/devcontainer/features/activestorage": {},
+    "ghcr.io/itsmechlark/features/postgresql:1": {}
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [3000],
+  // Uncomment to connect as root instead. More info: https://containers.dev/implementors/json_reference/#remoteUser.
+  // "remoteUser": "root",
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "bin/setup --skip-server",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // common uses
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "streetsidesoftware.code-spell-checker",
+        "oderwat.indent-rainbow",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        "shardulm94.trailing-spaces",
+        "mosapride.zenkaku",
+        "mikestead.dotenv",
+        // common ai agent
+        "saoudrizwan.claude-dev",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        // common git
+        "codezombiech.gitignore",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        // common ruby or rails
+        "kaiwood.endwise",
+        "CraigMaslowski.erb",
+        "bung87.rails",
+        "Shopify.ruby-extensions-pack",
+        "Shopify.ruby-lsp",
+        "Hridoy.rails-snippets",
+        "bung87.vscode-gemfile"
+      ]
+    }
+  }
+}
