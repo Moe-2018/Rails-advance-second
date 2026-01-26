@@ -109,3 +109,5 @@ group :test do
   # RSpec matchers
   gem "shoulda-matchers"
 end
+
+gem 'devise'
