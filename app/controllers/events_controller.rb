@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create]
   def index
-    @events = Event.all
+    @events = Event.limit(10).order(created_at: :desc)
   end
 
   def new
@@ -23,16 +23,26 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find_by(id: params[:id])
   end
 
   def destroy
+    @event = current_user.events.find_by(id: params[:id])
+
+    if @event.nil?
+      flash[:alert] = "削除する権限がありません"
+      redirect_to events_path
+    end
+
     if @event.destroy
     flash[:success] = "イベントを削除しました。"
     redirect_to events_path
     else
     flash[:alert] = "削除に失敗しました。"
-    render ::show,
+    render :show
+    end
   end
+
 
   def edit
   end
