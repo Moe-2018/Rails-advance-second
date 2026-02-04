@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Rails Advance" %></title>
+    <title><%= content_for(:title) || "イベント管理ポータル" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -20,11 +20,17 @@
 
   <body class="h-screen bg-blue-50">
     <%= render 'shared/navbar' %>
+
+    
+
     <main class="container mx-auto mt-20 py-8 px-5 flex items-center justify-center">
+      
+
       <%= yield %>
+
+      
     </main>
 
     <%= render 'shared/flash' %>
-    
-  </body>
+　</body>
 </html>

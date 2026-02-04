@@ -17,8 +17,8 @@ class EventsController < ApplicationController
       flash[:success] = 'イベントを登録しました。' # 成功時のフラッシュメッセージ
       redirect_to root_path 
     else
-      flash[:alert] = '登録に失敗しました' # 失敗時のフラッシュメッセージ
-      render :new # 投稿画面を再表示
+      flash.now[:alert] = '登録に失敗しました' # 失敗時のフラッシュメッセージ
+      render :new, status: :unprocessable_entity # 投稿画面を再表示
     end
   end
 
@@ -45,6 +45,7 @@ class EventsController < ApplicationController
 
 
   def edit
+    @event = Event.find(params[:id])
   end
 
   def update 
