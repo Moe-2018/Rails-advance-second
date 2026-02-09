@@ -36,7 +36,7 @@ gem "bootsnap", require: false
 gem "dotenv-rails"
 
 # Use the Prism syntax highlighter for code blocks in Markdown
-gem "prism", "1.3.0"
+gem "prism", "1.9.0"
 
 # Use Tailwind CSS for styling [https://tailwindcss.com/docs/installation#ruby-on-rails]
 gem "tailwindcss-rails", "~> 3.3.1"
