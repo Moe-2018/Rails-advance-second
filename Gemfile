@@ -100,6 +100,8 @@ group :development do
 
   # N+1 query detection
   gem 'bullet'
+
+  gem 'spring-commands-rspec'
 end
 
 group :test do
@@ -108,6 +110,8 @@ group :test do
 
   # RSpec matchers
   gem "shoulda-matchers"
+
+  gem "capybara"
 end
 
 gem 'devise'
