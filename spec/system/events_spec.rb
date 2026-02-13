@@ -137,5 +137,29 @@ RSpec.describe "Events", type: :system do
       expect(page).to have_content(@user.fullname)
     end
   end
+
+  describe 'ログ一覧機能の検証' do
+  before do
+    @post2 = create(:event, title: 'テスト2', description: 'テスト中2', start_date: '2026-02-01T12:45:41Z', organiser_name: 'テスト太郎さん', target_department: 'テスト部', user: @user)
+    visit '/events'
+  end
+ 
+  it '1件目のEventの詳細が表示される' do
+   expect(page).to have_content('テスト')
+   expect(page).to have_content('テスト部')
+   expect(page).to have_content(@user.fullname)
+  end
+ 
+  it '2件目のPostの詳細が表示される' do
+   expect(page).to have_content('テスト2')
+   expect(page).to have_content('テスト部')
+   expect(page).to have_content(@user.fullname)
+  end
+ 
+  it '投稿タイトルをクリックすると詳細ページへ遷移する' do
+    click_link 'テスト'
+    expect(current_path).to eq("/events/#{@event.id}")
+  end
+end
 end
 
