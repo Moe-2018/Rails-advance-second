@@ -162,6 +162,62 @@ RSpec.describe "Events", type: :system do
   end
 end
 
+describe 'イベント編集機能の検証' do
+  context '投稿したユーザーでログインしている場合' do
+    before do
+      sign_in @user # テストユーザーでログイン
+      visit "/events/#{@event.id}" # 投稿詳細ページにアクセス
+    end
+ 
+    it '編集リンクを表示する' do
+      expect(page).to have_link('編集') # 編集リンクが表示されていることを確認
+    end
+ 
+    it '編集ボタンをクリックするとeditページへ遷移する' do
+        click_link '編集'
+      expect(current_path).to eq(edit_event_path(@event)) 
+    end
+
+    it 'イベントを更新する' do 
+
+      visit edit_event_path(@event)
+
+       fill_in "event_title", with: "更新後テスト"
+       click_button "更新する"
+
+       expect(current_path).to eq('/')
+       expect(page).to have_content('イベントを更新しました。')
+       expect(page).to have_content('更新後テスト')
+    end
+
+     it '更新に失敗する' do
+       visit edit_event_path(@event)
+
+       fill_in "event_title", with: nil
+       click_button "更新する"
+
+       expect(page).to have_content('更新に失敗しました')
+
+    end
+  end
+
+   
+ 
+  context '投稿したユーザーでログインしていない場合' do
+    it '編集ボタンを表示しない' do
+      visit "/events/#{@event.id}" # 投稿詳細ページにアクセス
+      expect(page).not_to have_button('編集') # 編集ボタンが表示されていないことを確認
+    end
+ 
+    it '直接リクエストを投げてもeditページへ行かない' do
+      expect do
+        edit event_path(@event) # DELETE リクエストを直接送信
+        expect(current_path).to eq('/')
+      end
+    end
+  end
+end
+
 describe 'イベント削除機能の検証' do
   context '投稿したユーザーでログインしている場合' do
     before do
